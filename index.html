@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f7fb">
+  <meta name="description" content="RADIO MONDE AS : écoutez les radios du monde entier en direct.">
+
+  <title>RADIO MONDE AS - Le monde en direct</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://de1.api.radio-browser.info">
+  <link rel="preconnect" href="https://at1.api.radio-browser.info">
+</head>
+
+<body>
+
+  <div class="app-shell">
+
+    <header class="topbar">
+      <a class="brand" href="#">
+        <span class="brand-mark">AS<span>•</span></span>
+        <span class="brand-copy">
+          <strong>RADIO MONDE <em>AS</em></strong>
+          <small>LE MONDE EN DIRECT</small>
+        </span>
+      </a>
+
+      <div class="top-actions">
+        <span class="live-indicator"><i></i> EN DIRECT</span>
+        <button id="installBtn" class="icon-button" hidden>
+          ↓
+        </button>
+      </div>
+    </header>
+
+    <main>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">VOTRE FENÊTRE SUR LE MONDE</span>
+
+          <h1>
+            La planète<br>
+            <span>à l'écoute.</span>
+          </h1>
+
+          <p>
+            Découvrez des milliers de stations radio,
+            des quatre coins du monde.
+            Une seule application, toutes les ambiances.
+          </p>
+
+          <a class="hero-link" href="#stations">
+            Explorer les radios <span>↘</span>
+          </a>
+        </div>
+
+        <div class="hero-art">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+
+          <div class="globe">
+            <div class="globe-lines"></div>
+            <span>AS</span>
+          </div>
+
+          <div class="sound-wave wave-one"></div>
+          <div class="sound-wave wave-two"></div>
+
+          <span class="floating-note note-a">♫</span>
+          <span class="floating-note note-b">♪</span>
+
+          <span class="globe-caption">WORLD RADIO</span>
+        </div>
+      </section>
+
+      <section class="stats-row">
+        <div>
+          <strong id="stationCount">—</strong>
+          <span>STATIONS DISPONIBLES</span>
+        </div>
+
+        <div>
+          <strong id="countryCount">—</strong>
+          <span>PAYS RÉFÉRENCÉS</span>
+        </div>
+
+        <div>
+          <strong>24/7</strong>
+          <span>ÉCOUTE EN LIGNE</span>
+        </div>
+      </section>
+
+      <section class="section" id="stations">
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">À VOUS DE CHOISIR</span>
+            <h2>Explorez les radios</h2>
+          </div>
+
+          <button class="text-button" id="refreshBtn">
+            ↻ Actualiser
+          </button>
+        </div>
+
+        <div class="search-panel">
+
+          <label class="search-box">
+            <span>⌕</span>
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Rechercher une radio, une ville, un pays..."
+            >
+            <kbd>⌕</kbd>
+          </label>
+
+          <div class="filters">
+
+            <label>
+              <span>ZONE</span>
+              <select id="zoneSelect">
+                <option value="all">🌍 Monde entier</option>
+                <option value="Africa">Afrique</option>
+                <option value="Europe">Europe</option>
+                <option value="Asia">Asie</option>
+                <option value="North America">Amérique du Nord</option>
+                <option value="South America">Amérique du Sud</option>
+                <option value="Oceania">Océanie</option>
+              </select>
+            </label>
+
+            <label>
+              <span>PAYS</span>
+              <select id="countrySelect">
+                <option value="">Tous les pays</option>
+              </select>
+            </label>
+
+            <label>
+              <span>AMBIANCE</span>
+              <select id="genreSelect">
+                <option value="">Tous les genres</option>
+              </select>
+            </label>
+
+            <button class="filter-reset" id="resetBtn">
+              Réinitialiser
+            </button>
+
+          </div>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" data-view="popular">
+            Populaires
+          </button>
+
+          <button class="tab" data-view="all">
+            Toutes les radios
+          </button>
+
+          <button class="tab" data-view="recent">
+            Nouveautés
+          </button>
+
+          <button class="tab" data-view="favorites">
+            ♥ Mes favoris <span id="favoriteCount">0</span>
+          </button>
+        </div>
+
+        <div class="results-line">
+          <span id="resultsLabel">Chargement des stations...</span>
+          <span id="pageLabel"></span>
+        </div>
+
+        <div class="station-grid" id="stationGrid">
+          <div class="loading-card">
+            Recherche des radios du monde...
+          </div>
+        </div>
+
+        <div class="pagination">
+          <button id="loadMoreBtn" class="secondary-button" hidden>
+            Afficher plus de radios ＋
+          </button>
+        </div>
+
+        <p class="source-note">
+          Catalogue fourni par Radio Browser.
+          Les flux sont proposés par les stations et peuvent être temporairement indisponibles.
+        </p>
+
+      </section>
+
+      <section class="feature-strip">
+        <div class="feature-icon">♫</div>
+
+        <div>
+          <strong>Une radio, mille découvertes.</strong>
+          <p>
+            Musique, actualités, culture, sport et émissions du monde entier.
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <a class="footer-brand" href="#">
+        RADIO MONDE <b>AS</b>
+      </a>
+
+      <span>Écoutez le monde, où que vous soyez.</span>
+
+      <span>
+        © <span id="year"></span> RADIO MONDE AS
+      </span>
+    </footer>
+
+  </div>
+
+  <!-- LECTEUR AUDIO FIXE -->
+
+  <aside class="player">
+
+    <div class="now-playing">
+      <div class="station-cover" id="playerCover">♫</div>
+
+      <div class="now-copy">
+        <small>EN COURS D'ÉCOUTE</small>
+        <strong id="playerName">Choisissez une radio</strong>
+        <span id="playerCountry">Le monde vous attend</span>
+      </div>
+    </div>
+
+    <div class="player-controls">
+
+      <button
+        id="playPauseBtn"
+        class="play-button"
+        aria-label="Lecture ou pause"
+        disabled
+      >
+        ▶
+      </button>
+
+      <div class="playing-status">
+        <div class="equalizer" id="equalizer">
+          <i></i><i></i><i></i><i></i>
+        </div>
+
+        <span id="playerStatus">Prêt à écouter</span>
+      </div>
+
+    </div>
+
+    <div class="volume-control">
+      <span>−</span>
+
+      <input
+        id="volumeSlider"
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value="0.8"
+      >
+
+      <span>＋</span>
+    </div>
+
+    <audio id="audioPlayer" preload="none"></audio>
+
+  </aside>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="app.js" defer></script>
+
+</body>
+</html>
